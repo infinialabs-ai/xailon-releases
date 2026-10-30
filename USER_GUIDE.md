@@ -1,6 +1,6 @@
 # XailonCode user guide
 
-For XailonCode **0.2.21** · CLI, terminal UI, and desktop app
+For XailonCode **0.2.22** · CLI, terminal UI, and desktop app
 
 - [Installation](#installation)
 - [Connect a model](#connect-a-model)
@@ -215,6 +215,33 @@ Replace every placeholder. For OpenAI's endpoint, use
 URL and model id; set a nonempty placeholder key only when that server does not
 require authentication. PowerShell uses `$env:XAILON_PROVIDER = "openai"` and the
 same `$env:NAME = "value"` syntax for the other variables.
+
+### Xailon Token Factory
+
+Run `xailon configure` and choose **Xailon Token Factory**. The desktop app uses
+the key you sign in with here; its **Settings → Models** page shows whether it is set.
+
+1. A browser window opens on the Token Factory portal. Sign in.
+2. Pick the project whose models and credit you want to use, and click
+   **Authorize**.
+3. XailonCode receives a new project API key, labelled "Xailon CLI", and stores it
+   in the keyring. Choose a model from the project's list.
+
+If the browser does not open, XailonCode prints the sign-in URL to open yourself.
+You can revoke the key in the portal under the project's API keys; run
+`xailon configure` again to sign in afresh.
+
+To skip the browser and use a key you already have:
+
+```bash
+export XAILON_PROVIDER=tokenfactory
+export TOKENFACTORY_API_KEY="your-token-factory-key"
+export XAILON_MODEL="google/gemma-4-31b-it"
+xailon info --check
+```
+
+`TOKENFACTORY_HOST` (the API, ending in `/v1`) and `TOKENFACTORY_PORTAL_HOST` (the
+portal) point XailonCode at a different Token Factory deployment.
 
 ### Custom endpoints
 

@@ -1,5 +1,16 @@
 # XailonCode releases
 
+## v0.2.22 — Sign in to Xailon Token Factory
+
+- **Xailon Token Factory provider:** choose **Xailon Token Factory** in `xailon configure` and sign in from the browser window that opens. Pick a project and click Authorize, and XailonCode saves the issued API key in your keyring. You no longer need a custom provider or a pasted key. The desktop app uses the same saved key.
+  - The model list comes from your Token Factory project, and embedding-only models are left out.
+  - To use an existing key instead, set `TOKENFACTORY_API_KEY`.
+  - `TOKENFACTORY_HOST` and `TOKENFACTORY_PORTAL_HOST` point XailonCode at a different Token Factory deployment.
+
+### Packages and limits
+
+Apple Silicon macOS CLI/TUI/server archive and desktop DMG. Builds are ad-hoc signed, not Apple-notarized. Other platforms remain pending and are not advertised as downloadable. Use the public install/update scripts; the CLI's built-in `xailon update` still targets the source repository.
+
 ## v0.2.21 — Live mods
 
 - **Live mods:** a mod can add its own live interface to XailonCode. Mods can add:
