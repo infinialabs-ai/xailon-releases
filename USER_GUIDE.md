@@ -1,6 +1,6 @@
 # XailonCode user guide
 
-For XailonCode **0.2.22** · CLI, terminal UI, and desktop app
+For XailonCode **0.2.23** · CLI, terminal UI, and desktop app
 
 - [Installation](#installation)
 - [Connect a model](#connect-a-model)
@@ -218,7 +218,8 @@ same `$env:NAME = "value"` syntax for the other variables.
 
 ### Xailon Token Factory
 
-Run `xailon configure` and choose **Xailon Token Factory**. The desktop app uses
+On a new install, `xailon configure` offers **Xailon Token Factory Login** first.
+Otherwise, run `xailon configure` and choose **Xailon Token Factory**. The desktop app uses
 the key you sign in with here; its **Settings → Models** page shows whether it is set.
 
 1. A browser window opens on the Token Factory portal. Sign in.

@@ -1,5 +1,14 @@
 # XailonCode releases
 
+## v0.2.23 — Token Factory on first run
+
+- **First-run setup:** `xailon configure` on a new install now offers **Xailon Token Factory Login** as the recommended option. It signs you in, picks a model from your project and makes Token Factory your provider in one step.
+- **Sign-in request:** the connect request now uses the same state format as the Token Factory documentation.
+
+### Packages and limits
+
+Apple Silicon macOS CLI/TUI/server archive and desktop DMG. Builds are ad-hoc signed, not Apple-notarized. Other platforms remain pending and are not advertised as downloadable. Use the public install/update scripts; the CLI's built-in `xailon update` still targets the source repository.
+
 ## v0.2.22 — Sign in to Xailon Token Factory
 
 - **Xailon Token Factory provider:** choose **Xailon Token Factory** in `xailon configure` and sign in from the browser window that opens. Pick a project and click Authorize, and XailonCode saves the issued API key in your keyring. You no longer need a custom provider or a pasted key. The desktop app uses the same saved key.

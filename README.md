@@ -20,10 +20,10 @@ This is the public distribution repository. It contains documentation, installat
 helpers, checksums, and release metadata. Application binaries are attached to
 GitHub Releases rather than stored in Git history.
 
-## Latest: v0.2.22
+## Latest: v0.2.23
 
 Sign in to Xailon Token Factory from `xailon configure` with your Token Factory
-account; no API key to copy. See [what changed](CHANGELOG.md) and the
+account; no API key to copy. New installs now offer it first. See [what changed](CHANGELOG.md) and the
 [user guide](USER_GUIDE.md#xailon-token-factory).
 
 **Available:** Apple Silicon macOS CLI, TUI, server, and desktop. Windows, Linux,
