@@ -20,13 +20,15 @@ This is the public distribution repository. It contains documentation, installat
 helpers, checksums, and release metadata. Application binaries are attached to
 GitHub Releases rather than stored in Git history.
 
-## Latest: v0.2.23
+## Latest: v0.3.0
 
-Sign in to Xailon Token Factory from `xailon configure` with your Token Factory
-account; no API key to copy. New installs now offer it first. See [what changed](CHANGELOG.md) and the
-[user guide](USER_GUIDE.md#xailon-token-factory).
+Xailon Studio is a new native desktop app. It draws its interface on the GPU, starts in
+about half the time, and handles very long threads without slowing down. It has
+everything the desktop app has, plus terminal-UI commands, native dashboards, and
+remote `xailond` connections. See [what changed](CHANGELOG.md) and the
+[user guide](USER_GUIDE.md#use-xailon-studio).
 
-**Available:** Apple Silicon macOS CLI, TUI, server, and desktop. Windows, Linux,
+**Available:** Apple Silicon macOS CLI, TUI, server, Xailon Studio, and desktop. Windows, Linux,
 and Intel Mac packages are pending. macOS packages are ad-hoc signed and not
 Apple-notarized. Only attached release assets are available for download.
 
@@ -41,7 +43,8 @@ Apple-notarized. Only attached release assets are available for download.
 | Windows, x86-64 | `xailon-x86_64-pc-windows-msvc.zip` or `.msi` | `xailon-desktop-x86_64-pc-windows-msvc.msi` |
 
 The asset list on each release is authoritative. Only download a package actually
-attached to that release. The CLI archive also contains `xailond` and, on Linux
+attached to that release. Xailon Studio, the new native desktop app, is
+`xailon-studio-aarch64-apple-darwin.dmg` (Apple Silicon only for now). The CLI archive also contains `xailond` and, on Linux
 and Windows, the required sandbox helper. The desktop app contains its own engine.
 
 ## One-command install

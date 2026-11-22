@@ -1,11 +1,12 @@
 # XailonCode user guide
 
-For XailonCode **0.2.23** · CLI, terminal UI, and desktop app
+For XailonCode **0.3.0** · CLI, terminal UI, Xailon Studio, and desktop app
 
 - [Installation](#installation)
 - [Connect a model](#connect-a-model)
 - [Use the terminal UI](#use-the-terminal-ui)
 - [Use the command line](#use-the-command-line)
+- [Use Xailon Studio](#use-xailon-studio)
 - [Use the desktop app](#use-the-desktop-app)
 - [Rich responses and display controls](#rich-responses-and-display-controls)
 - [MCP servers and shared Mods](#mcp-servers-and-shared-mods)
@@ -121,6 +122,11 @@ The combined `SHA256SUMS` contains hashes for every asset in the release.
 Apple Silicon packages require an Apple Silicon Mac. Use the Intel package on an
 Intel Mac. The release notes identify the build's minimum macOS version and the
 platforms actually tested.
+
+**Xailon Studio:** verify `xailon-studio-aarch64-apple-darwin.dmg`, open it, and drag
+**Xailon Studio** into **Applications**. The build is ad-hoc signed, so the first time
+you open it, right-click the app and choose **Open**. Run `xailon configure` after
+installing the CLI below; Studio uses the same saved model configuration.
 
 **Desktop:** verify the `.dmg`, open it, and drag **Xailon Desktop** into
 **Applications**. Run `xailon configure` after installing the CLI below, then open
@@ -366,6 +372,46 @@ interactive approval: an action requiring approval is denied. Exit codes include
 
 `xailond` is the optional local HTTP server. The desktop app runs its engine in
 process, so starting `xailond` is not required to use the GUI.
+
+## Use Xailon Studio
+
+Xailon Studio is the native desktop app. It has everything in
+[the desktop app](#use-the-desktop-app), drawn natively on the GPU, and runs the agent in the same
+process. It starts faster, uses less memory, and stays responsive in very long
+threads. The desktop app gets no new features and will be retired once Studio
+replaces it.
+
+1. Configure your provider with the CLI, then launch **Xailon Studio**.
+2. Select **Add project** in the sidebar and choose a folder.
+3. Start a thread with **Cmd+N** and give it a clear task.
+
+Studio has everything the desktop app has: approvals and the Approvals inbox, plan
+review, clarifying questions, attachments, subagent tasks, **Review changes** with
+line comments, the terminal, automations, extensions and live mods. It also has:
+
+- **Terminal-UI commands in the composer:** `/status`, `/details`, `/edit`,
+  `/permission`, `/resume`, `/mode`, and `/plan` work as they do in the
+  [terminal UI](#use-the-terminal-ui). Up and Down recall earlier prompts, and `@`
+  completes file names.
+- **Native dashboards:** when the agent answers with an `xailon-ui` block, Studio
+  draws its metrics, tables, charts, progress bars, and form controls. Buttons send
+  their message and the form's values back to the agent.
+- **Remote servers:** open the command palette with **Cmd+K**, choose
+  **Add server…**, and enter a name, the URL of a running `xailond`, and its secret.
+  The secret is stored in the OS keychain. Saved servers then appear in the palette;
+  **Connect to This Mac** switches back to the local engine.
+
+| Shortcut | Action |
+| --- | --- |
+| Cmd+K | Command palette |
+| Cmd+N | New thread |
+| Cmd+1 … Cmd+4 | Threads, Approvals, Automations, Extensions |
+| Cmd+, | Settings |
+| Cmd+Shift+D | Show or hide changes |
+| Cmd+Shift+L | Switch light and dark theme |
+| Cmd+/ | Shortcut help |
+
+Enter sends a message and Shift+Enter adds a newline. Esc interrupts a running turn.
 
 ## Use the desktop app
 

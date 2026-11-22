@@ -1,5 +1,28 @@
 # XailonCode releases
 
+## v0.3.0 — Xailon Studio
+
+- **Xailon Studio, a new native desktop app:** Studio draws its own interface on the GPU instead of running a web view, and runs the agent in the same process. In our replay benchmark on an M3 Max, measured before this release's redesign, Studio:
+  - reached its first frame in 216 ms, where the current desktop app takes 399 ms
+  - used 121 MB at idle, against 211 MB
+  - replayed a very long thread in 41 ms, against 10.7 s, and stayed near 114 MB, against 1.7 GB
+- **Everything from the desktop app:** projects and worktrees, threads, approvals and the Approvals inbox, plan review, clarifying questions as answerable cards, attachments and inline images, subagent tasks, review-changes diffs with line comments, an embedded terminal, settings, model providers, the extensions hub (MCP servers, skills, plugins, recipes, routing), automations and live mods.
+- **Beyond the desktop app:**
+  - Terminal-UI commands in the composer: `/status`, `/details`, `/edit`, `/permission`, `/resume`, `/mode` and `/plan`.
+  - Up and Down recall earlier prompts.
+  - `@` completes files as well as commands.
+  - Dashboards that the agent emits as `xailon-ui` blocks are drawn natively: metrics, tables, charts, progress and forms that send their values back.
+  - Connect to a remote `xailond` from the command palette (**Cmd+K → Add server…**). Server secrets are kept in the OS keychain.
+- **A new design:** new type, spacing and color tokens checked for AA contrast, light and dark themes (**Cmd+Shift+L**), a command palette (**Cmd+K**) and shortcut help (**Cmd+/**).
+- **Agent:** the model can answer with a `xailon-ui` dashboard. Clients that can't draw one show a text fallback.
+- **Server:** `xailond` adds a WebSocket endpoint with `thread/list` and `thread/read`. Streamed text arrives in fewer, larger updates.
+- **Token Factory:** Studio and the desktop app use the Xailon Token Factory sign-in from 0.2.22 and 0.2.23; run `xailon configure` once and every app uses it.
+- **Desktop app:** no new features; it stays available while Studio replaces it. It gains a single-owner scheduler and worktree merge.
+
+### Packages and limits
+
+Apple Silicon macOS CLI/TUI/server archive, the Xailon Studio DMG and the desktop DMG. Builds are ad-hoc signed, not Apple-notarized: the first time you open Studio, right-click it and choose **Open**. Other platforms remain pending and are not advertised as downloadable. Use the public install/update scripts; the CLI's built-in `xailon update` still targets the source repository. Live mods need Node.js 22 or later on your `PATH`.
+
 ## v0.2.23 — Token Factory on first run
 
 - **First-run setup:** `xailon configure` on a new install now offers **Xailon Token Factory Login** as the recommended option. It signs you in, picks a model from your project and makes Token Factory your provider in one step.
