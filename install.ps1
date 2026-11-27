@@ -52,6 +52,10 @@ if (-not $Version) {
     $Version = ([string]$response).Trim()
 }
 if ($Version -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9][A-Za-z0-9.-]*)?$') { throw 'Invalid release version.' }
+if ($Component -ne 'cli') {
+    $release = [version](($Version.TrimStart('v') -split '-')[0])
+    if ($release -ge [version]'0.4.0') { throw "The desktop app is frozen and is not part of $Version. Install Xailon Studio from the release page, or use -Version v0.3.0 for the last desktop build." }
+}
 $base = "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/$Version"
 Write-Host "Xailon $Action`: $Version / Windows x86-64 / $Component"
 Write-Host "Download source: $base"
@@ -71,7 +75,7 @@ try {
         Install-Msi $package $log
     }
     Write-Host "Xailon $Action complete ($Version)."
-    Write-Host 'Open a new terminal, run xailon configure, then xailon tui or open Xailon Desktop.'
+    Write-Host 'Open a new terminal, run xailon configure, then xailon tui.'
     Write-Host 'The desktop MSI installs WebView2 when required. Windows may ask for administrator approval.'
     Write-Host 'To update, run this script with -Action update and the same -Component value.'
 } finally {

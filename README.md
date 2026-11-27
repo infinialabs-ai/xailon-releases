@@ -9,7 +9,7 @@
 
 Official binary downloads and user documentation from **Infinia Technologies**.
 Xailon is a local-first AI agent with a command-line interface, a terminal UI,
-and a desktop app. Connect your own model provider or local model server.
+and Xailon Studio, a native desktop app. Connect your own model provider or local model server.
 
 **[Website](https://xailoncode.infinialabs.ai/)** ·
 **[Release downloads](https://github.com/InfiniaTechLabs/xailon-releases/releases)** ·
@@ -20,32 +20,35 @@ This is the public distribution repository. It contains documentation, installat
 helpers, checksums, and release metadata. Application binaries are attached to
 GitHub Releases rather than stored in Git history.
 
-## Latest: v0.3.0
+## Latest: v0.4.0
 
-Xailon Studio is a new native desktop app. It draws its interface on the GPU, starts in
-about half the time, and handles very long threads without slowing down. It has
-everything the desktop app has, plus terminal-UI commands, native dashboards, and
-remote `xailond` connections. See [what changed](CHANGELOG.md) and the
-[user guide](USER_GUIDE.md#use-xailon-studio).
+Turns are faster: large tool sets load on demand, cached prompts survive model
+switches, and compaction runs in the background. An opt-in learned profile picks
+up your working preferences across sessions, and each finished turn shows a
+one-line summary. See [what changed](CHANGELOG.md) and the
+[user guide](USER_GUIDE.md#learned-profile).
 
-**Available:** Apple Silicon macOS CLI, TUI, server, Xailon Studio, and desktop. Windows, Linux,
-and Intel Mac packages are pending. macOS packages are ad-hoc signed and not
+**Available:** Apple Silicon macOS CLI, TUI, server, and Xailon Studio. The desktop app is
+frozen and replaced by Xailon Studio; its last build is the v0.3.0 desktop DMG. Windows,
+Linux, and Intel Mac packages are pending. macOS packages are ad-hoc signed and not
 Apple-notarized. Only attached release assets are available for download.
 
 ## Choose your download
 
-| Platform | CLI / TUI | Desktop |
+| Platform | CLI / TUI | Xailon Studio |
 | --- | --- | --- |
-| macOS, Apple Silicon | `xailon-aarch64-apple-darwin.tar.bz2` or `.pkg` | `xailon-desktop-aarch64-apple-darwin.dmg` |
-| macOS, Intel | `xailon-x86_64-apple-darwin.tar.bz2` or `.pkg` | `xailon-desktop-x86_64-apple-darwin.dmg` |
-| Linux, x86-64 | `xailon-x86_64-unknown-linux-gnu.tar.bz2`, `.deb`, or `.rpm` | `xailon-desktop-x86_64-unknown-linux-gnu.deb` or `.AppImage` |
+| macOS, Apple Silicon | `xailon-aarch64-apple-darwin.tar.bz2` | `xailon-studio-aarch64-apple-darwin.dmg` |
+| macOS, Intel | `xailon-x86_64-apple-darwin.tar.bz2` or `.pkg` | Not included |
+| Linux, x86-64 | `xailon-x86_64-unknown-linux-gnu.tar.bz2`, `.deb`, or `.rpm` | Not included |
 | Linux, ARM64 | `xailon-aarch64-unknown-linux-gnu.tar.bz2`, `.deb`, or `.rpm` | Not included |
-| Windows, x86-64 | `xailon-x86_64-pc-windows-msvc.zip` or `.msi` | `xailon-desktop-x86_64-pc-windows-msvc.msi` |
+| Windows, x86-64 | `xailon-x86_64-pc-windows-msvc.zip` or `.msi` | Not included |
 
 The asset list on each release is authoritative. Only download a package actually
-attached to that release. Xailon Studio, the new native desktop app, is
-`xailon-studio-aarch64-apple-darwin.dmg` (Apple Silicon only for now). The CLI archive also contains `xailond` and, on Linux
-and Windows, the required sandbox helper. The desktop app contains its own engine.
+attached to that release. Xailon Studio is Apple Silicon only for now. The CLI archive
+also contains `xailond` and, on Linux and Windows, the required sandbox helper.
+The desktop app is no longer built. Its last package,
+`xailon-desktop-aarch64-apple-darwin.dmg`, stays on the
+[v0.3.0 release](https://github.com/InfiniaTechLabs/xailon-releases/releases/tag/v0.3.0).
 
 ## One-command install
 
@@ -62,7 +65,7 @@ irm https://xailoncode.infinialabs.ai/install.ps1 | iex
 ```
 
 The default installs the CLI and TUI. The [installer guide](USER_GUIDE.md#one-command-install-and-update)
-explains desktop installation, updates, pinned versions, and dry runs. Inspect
+explains updates, pinned versions, and dry runs. Inspect
 [install.sh](install.sh) or [install.ps1](install.ps1) before running if preferred.
 
 ## Start here
@@ -71,7 +74,7 @@ explains desktop installation, updates, pinned versions, and dry runs. Inspect
 2. Verify its SHA-256 checksum against the release's `SHA256SUMS` or matching
    `.sha256` file. See the [installation guide](USER_GUIDE.md#installation).
 3. Install the CLI and run `xailon configure` to save your provider settings.
-4. Open **Xailon Desktop**, or run `xailon tui` in your project directory.
+4. Open **Xailon Studio**, or run `xailon tui` in your project directory.
 
 ```bash
 cd your-project

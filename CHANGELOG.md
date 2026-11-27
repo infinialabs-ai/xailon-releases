@@ -1,5 +1,27 @@
 # XailonCode releases
 
+## v0.4.0 — Faster turns and a profile that learns
+
+- **Faster turns:**
+  - When tool definitions pass about 10k tokens, they load on demand through a `tool_search` tool.
+  - Cached prompt prefixes are kept per model and reused when you switch models.
+  - Compaction starts earlier and runs in the background. It keeps the newest results.
+  - Extensions load in the background, so the first prompt doesn't wait.
+  - The CLI exits in under 15 ms, down from about 200 ms.
+- **Routing:** a speed floor moves work off slow models. Delegated subagents get task kinds, run at most 4 at once, and have a single writer for edits. Long subagent results are summarised.
+- **Learned profile (opt-in):** Xailon can learn your working preferences across sessions.
+  - It stays off until you consent with `/memory learned consent on` or `xailon memory learned consent on`.
+  - List, edit, pin, delete or clear entries with `/memory learned`. `--no-learn` turns it off for one run. A project can only turn learning off.
+  - Learning runs after a session, never during a turn. It removes secrets before sending. An entry needs two sessions before it is used.
+  - With learning on, routing can start on your usual task class, move up one model tier when you reject many tool calls, and suggest routing rules from repeated manual model switches. You must accept a suggestion before it applies.
+- **Turn summary:** the terminal UI shows a one-line summary under each finished turn: rounds, tools, edits, failed checks, tokens and cached share, cost, time and model switches. While a turn runs, it shows the live round and elapsed time. Studio shows the same as chips. Session message counts now include only visible messages.
+- **Server:** `xailond` releases idle agents and shares MCP extensions across sessions (`XAILON_SHARED_EXTENSIONS`). Streaming is event-driven with keep-alives, and queues are bounded. New routes: `GET /status/timing` and `/memory/learned`. The protocol adds `round_started` and `round_completed` events behind a `trajectory` client capability.
+- **Token Factory:** `xailon configure` now offers **Xailon Token Factory Login** in its main menu, not only on first run.
+
+### Packages and limits
+
+Apple Silicon macOS CLI/TUI/server archive and the Xailon Studio DMG. Builds are ad-hoc signed, not Apple-notarized: the first time you open Studio, right-click it and choose **Open**. Other platforms remain pending and are not advertised as downloadable. Use the public install/update scripts; the CLI's built-in `xailon update` still targets the source repository. The desktop app was not rebuilt: it is frozen and replaced by Xailon Studio. Its last build, the v0.3.0 desktop DMG, stays available on the v0.3.0 release.
+
 ## v0.3.0 — Xailon Studio
 
 - **Xailon Studio, a new native desktop app:** Studio draws its own interface on the GPU instead of running a web view, and runs the agent in the same process. In our replay benchmark on an M3 Max, measured before this release's redesign, Studio:

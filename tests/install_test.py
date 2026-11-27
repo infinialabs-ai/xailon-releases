@@ -118,5 +118,13 @@ sys.stdout.buffer.write(source.read_bytes())
         self.assertNotEqual(result.returncode,0); self.assertIn('not available',result.stderr)
         result=self.run_script('--version','v1/../../bad','--dry-run')
         self.assertNotEqual(result.returncode,0); self.assertIn('Invalid release version',result.stderr)
+    def test_desktop_stops_after_last_desktop_release(self):
+        for version in ('v0.4.0','v1.0.0'):
+            result=self.run_script('--version',version,'--component','all','--dry-run')
+            self.assertNotEqual(result.returncode,0); self.assertIn('desktop app is frozen',result.stderr)
+        result=self.run_script('--version','v0.3.0','--component','all','--dry-run')
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        result=self.run_script('--version','v0.4.0','--dry-run')
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
 
 if __name__=='__main__': unittest.main()

@@ -40,6 +40,13 @@ main() {
   fi
   if [ -z "$version" ]; then version=$(fetch_stdout 'https://xailoncode.infinialabs.ai/latest-version.txt' | tr -d '\r\n'); fi
   printf '%s\n' "$version" | LC_ALL=C grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9][A-Za-z0-9.-]*)?$' || fail 'Invalid release version'
+  if [ "$component" != cli ]; then
+    frozen=${version#v}; frozen=${frozen%%-*}
+    major=${frozen%%.*}; minor=${frozen#*.}; minor=${minor%%.*}
+    if [ "$major" -gt 0 ] || [ "$minor" -ge 4 ]; then
+      fail "The desktop app is frozen and is not part of $version. Install Xailon Studio from the release page, or use --version v0.3.0 for the last desktop build."
+    fi
+  fi
   base="https://github.com/InfiniaTechLabs/xailon-releases/releases/download/$version"
   mode=portable
   if [ "$os" = Linux ]; then
@@ -88,7 +95,7 @@ main() {
   fi
   printf '\nXailon %s complete (%s).\n' "$action" "$version"
   printf 'For portable installs, add %s/bin to PATH.\n' "$prefix"
-  printf '%s\n' 'Next: xailon configure, then xailon tui or open Xailon Desktop.'
+  printf '%s\n' 'Next: xailon configure, then xailon tui or open Xailon Studio.'
   printf '%s\n' 'Update later by running this script with update and the same --component option.'
 }
 fail() { printf 'Error: %s\n' "$*" >&2; exit 1; }

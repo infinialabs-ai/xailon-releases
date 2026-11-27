@@ -1,6 +1,6 @@
 # XailonCode user guide
 
-For XailonCode **0.3.0** · CLI, terminal UI, Xailon Studio, and desktop app
+For XailonCode **0.4.0** · CLI, terminal UI and Xailon Studio
 
 - [Installation](#installation)
 - [Connect a model](#connect-a-model)
@@ -8,6 +8,8 @@ For XailonCode **0.3.0** · CLI, terminal UI, Xailon Studio, and desktop app
 - [Use the command line](#use-the-command-line)
 - [Use Xailon Studio](#use-xailon-studio)
 - [Use the desktop app](#use-the-desktop-app)
+- [Turn summary](#turn-summary)
+- [Learned profile](#learned-profile)
 - [Rich responses and display controls](#rich-responses-and-display-controls)
 - [MCP servers and shared Mods](#mcp-servers-and-shared-mods)
 - [Live mods](#live-mods)
@@ -33,7 +35,7 @@ requests local. You do not need a XailonCode account.
 
 ## Installation
 
-**v0.2.18 availability:** Apple Silicon macOS CLI, TUI, local server, and desktop app.
+**v0.4.0 availability:** Apple Silicon macOS CLI, TUI, local server, and Xailon Studio.
 Windows, Linux, and Intel Mac packages are pending; the commands below document
 installer support, not a promise that every platform has a published package.
 Check the release asset list before installing. macOS builds are ad-hoc signed
@@ -47,7 +49,8 @@ Choose the operating system and processor shown in the release asset name.
 
 The installer detects your OS and CPU, downloads the selected release, verifies
 SHA-256 before running or copying it, and includes the matching sandbox helper.
-The default component is the CLI plus TUI. Add the desktop option for the GUI.
+The default component is the CLI plus TUI. Install Xailon Studio from its DMG, as
+described under [macOS](#macos).
 Review the script first if you prefer: [install.sh](install.sh) or
 [install.ps1](install.ps1).
 
@@ -57,16 +60,12 @@ Review the script first if you prefer: [install.sh](install.sh) or
 curl -fsSL https://xailoncode.infinialabs.ai/install.sh | sh
 ```
 
-**macOS / Linux — install both CLI and desktop, or update both:**
+The installer's desktop option installs the frozen desktop app, which is no longer
+built. Its last build is v0.3.0, so pin that version to use it:
+`--component all --version v0.3.0`. Releases from v0.4.0 on have no desktop
+package and the installer stops with a message.
 
-```bash
-curl -fsSL https://xailoncode.infinialabs.ai/install.sh | sh -s -- --component all
-curl -fsSL https://xailoncode.infinialabs.ai/install.sh | sh -s -- update --component all
-```
-
-Use `--component desktop` to install the GUI with the CLI setup tools needed
-for provider configuration. `--component all` has the same complete installation. Linux ARM64 currently supports only `--component cli`.
-Use `--version v0.2.18` to pin a version and `--dry-run` to see the plan without
+Use `--version v0.4.0` to pin a version and `--dry-run` to see the plan without
 changing your machine. Portable CLI installations default to `~/.local/bin`;
 `--prefix /absolute/path` chooses another prefix. Native Linux package
 installations use their system locations instead.
@@ -84,7 +83,7 @@ irm https://xailoncode.infinialabs.ai/install.ps1 | iex
 & ([scriptblock]::Create((irm 'https://xailoncode.infinialabs.ai/install.ps1'))) -Action update -Component all
 ```
 
-Windows accepts `-Component cli|desktop|all`, `-Version v0.2.18`, and `-DryRun`.
+Windows accepts `-Component cli|desktop|all`, `-Version v0.4.0`, and `-DryRun`.
 It uses native MSI installers and installs the Microsoft Visual C++ runtime if
 missing, checking Microsoft's Authenticode signature first. The desktop MSI
 handles WebView2. Native package installation can ask for administrator approval.
@@ -128,7 +127,7 @@ platforms actually tested.
 you open it, right-click the app and choose **Open**. Run `xailon configure` after
 installing the CLI below; Studio uses the same saved model configuration.
 
-**Desktop:** verify the `.dmg`, open it, and drag **Xailon Desktop** into
+**Desktop (frozen):** the last desktop DMG is on the v0.3.0 release. Verify the `.dmg`, open it, and drag **Xailon Desktop** into
 **Applications**. Run `xailon configure` after installing the CLI below, then open
 the app. The app uses the same saved model configuration as the CLI.
 
@@ -224,9 +223,9 @@ same `$env:NAME = "value"` syntax for the other variables.
 
 ### Xailon Token Factory
 
-On a new install, `xailon configure` offers **Xailon Token Factory Login** first.
-Otherwise, run `xailon configure` and choose **Xailon Token Factory**. The desktop app uses
-the key you sign in with here; its **Settings → Models** page shows whether it is set.
+Run `xailon configure` and choose **Xailon Token Factory Login** in the main menu.
+On a new install it is the first option. Xailon Studio uses the key you sign in
+with here.
 
 1. A browser window opens on the Token Factory portal. Sign in.
 2. Pick the project whose models and credit you want to use, and click
@@ -378,8 +377,8 @@ process, so starting `xailond` is not required to use the GUI.
 Xailon Studio is the native desktop app. It has everything in
 [the desktop app](#use-the-desktop-app), drawn natively on the GPU, and runs the agent in the same
 process. It starts faster, uses less memory, and stays responsive in very long
-threads. The desktop app gets no new features and will be retired once Studio
-replaces it.
+threads. Studio replaces the desktop app, which is frozen: its last build is
+the v0.3.0 desktop DMG, which stays on the v0.3.0 release.
 
 1. Configure your provider with the CLI, then launch **Xailon Studio**.
 2. Select **Add project** in the sidebar and choose a folder.
@@ -414,6 +413,11 @@ line comments, the terminal, automations, extensions and live mods. It also has:
 Enter sends a message and Shift+Enter adds a newline. Esc interrupts a running turn.
 
 ## Use the desktop app
+
+The desktop app is frozen and is no longer built. Use
+[Xailon Studio](#use-xailon-studio) instead. If you still need it, its last build,
+`xailon-desktop-aarch64-apple-darwin.dmg`, stays on the
+[v0.3.0 release](https://github.com/InfiniaTechLabs/xailon-releases/releases/tag/v0.3.0).
 
 1. Configure your provider with the CLI, then launch **Xailon Desktop**.
 2. Under **Open a project**, choose **Browse folders…**, or enter a folder path
@@ -468,6 +472,42 @@ in-process scheduler to execute tasks.
 **Open a document folder…** creates a Cowork project for reports and documents.
 Its container-based tools may require Docker or Podman; installing XailonCode alone
 does not install a container runtime.
+
+## Turn summary
+
+When a turn finishes, the terminal UI shows a one-line summary under it: rounds,
+tools, edits, failed checks, tokens and the cached share, cost, time and model
+switches. While a turn runs, it shows the current round and the elapsed time.
+Xailon Studio shows the same figures as chips under the turn.
+
+Session message counts include only the messages you can see.
+
+## Learned profile
+
+Xailon can learn your working preferences across sessions, such as how you like
+changes made and which kind of tasks you usually do. It is off until you agree to it.
+
+```text
+/memory learned consent on
+```
+
+From the shell, run `xailon memory learned consent on`. Use `consent off` to stop.
+
+- `/memory learned` lists the entries. From there you can edit, pin, delete or
+  clear them.
+- `--no-learn` turns learning off for one run, for example `xailon tui --no-learn`.
+- A project's settings can turn learning off, but never on.
+
+Learning runs after a session ends, never during a turn. Secrets are removed
+before anything is sent to the model. An entry must appear in two sessions before
+Xailon uses it.
+
+With learning on, routing can use the profile:
+
+- A new session can start on the task class you usually work in.
+- If you reject many tool calls, routing moves up one model tier.
+- If you often switch models by hand for the same kind of task, Xailon suggests a
+  routing rule. A suggestion does nothing until you accept it.
 
 ## Rich responses and display controls
 

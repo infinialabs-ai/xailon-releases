@@ -1,34 +1,26 @@
 {
-  "version": "v0.3.0",
+  "version": "v0.4.0",
   "channel": "preview",
   "status": "published",
-  "source_commit": "b810685c318a24f0c078fa5009197e8f819b0205",
+  "source_commit": "451120fcc75aa682bfbbe82a5ab2f348078afa27",
   "repository": "InfiniaTechLabs/xailon-releases",
-  "release_url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/tag/v0.3.0",
+  "release_url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/tag/v0.4.0",
   "assets": [
     {
       "name": "xailon-aarch64-apple-darwin.tar.bz2",
       "target": "aarch64-apple-darwin",
       "component": "cli",
-      "sha256": "9dad8819cc11f8ce6543bf0d3b682f97acca682da062b7298cd24ddca938053a",
-      "size": 104636828,
-      "url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/v0.3.0/xailon-aarch64-apple-darwin.tar.bz2"
+      "sha256": "5aa2b88fe338c67464eca87b6498fe08bb30a4121d42dfef97a93540069474fe",
+      "size": 105472388,
+      "url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/v0.4.0/xailon-aarch64-apple-darwin.tar.bz2"
     },
     {
       "name": "xailon-studio-aarch64-apple-darwin.dmg",
       "target": "aarch64-apple-darwin",
       "component": "studio",
-      "sha256": "b9c7a8c02a94784b1a2126126befe6a738c8973cfa9e197a910f4e35b5272b78",
-      "size": 58851580,
-      "url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/v0.3.0/xailon-studio-aarch64-apple-darwin.dmg"
-    },
-    {
-      "name": "xailon-desktop-aarch64-apple-darwin.dmg",
-      "target": "aarch64-apple-darwin",
-      "component": "desktop",
-      "sha256": "6dc3f7f9b0807d30aa8de92591e1ae8cf87cc16a9f631fa942fb2c6a39a8b82b",
-      "size": 50567007,
-      "url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/v0.3.0/xailon-desktop-aarch64-apple-darwin.dmg"
+      "sha256": "bbc89a4292ed1a38efd970a8e1352522bbe19807e8096259a40bf970f4c5bb27",
+      "size": 59179233,
+      "url": "https://github.com/InfiniaTechLabs/xailon-releases/releases/download/v0.4.0/xailon-studio-aarch64-apple-darwin.dmg"
     }
   ]
 }
